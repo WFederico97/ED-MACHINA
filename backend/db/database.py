@@ -6,14 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from dotenv import load_dotenv
 
-env_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
-
-if os.path.exists(env_file_path):
-    print("El archivo .env fue encontrado.")
-else:
-    print("El archivo .env NO fue encontrado en la ruta especificada.")
-
-load_dotenv(env_file_path)
+load_dotenv(dotenv_path='../config/env_prod.py')
 
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
