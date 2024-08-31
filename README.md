@@ -22,9 +22,9 @@ Se utilizó el motor de PostgreSQL. A su vez, en el archivo `database.py` se eje
 ### WALKTHROUGH
 
 1. Una vez inicializada la app, las tablas `carreras` y `materias` ya se encuentran con datos y su respectiva integridad referencial.
-2. Para crear una nueva persona, hay que dirigirse al endpoint de método 'PUT'. Este mismo recibe un `id` como parámetro y luego un schema que contiene nombre, apellido, email y un campo booleano `active` que viene predeterminado como `True`.
+2. Para crear una nueva persona, hay que dirigirse al endpoint de método 'POST'. Este mismo recibe un `id` como parámetro y luego un schema que contiene nombre, apellido, email y un campo booleano `active` que viene predeterminado como `True`.
 3. Una vez creada la persona, puede ser consultada tanto por la consulta general como 'get all' y por `id`.
-4. Si queremos agregar una carrera o modificar algún dato a una persona ya creada, deberemos volver al punto 2 y modificar los datos que haga falta en ese endpoint.
+4. Si queremos ELIMINAR una carrera o modificar algún dato a una persona ya creada, deberemos ir al endpoint PUT y modificar los datos que haga falta en ese endpoint.
 5. En el caso de que queramos eliminar a una persona de la base de datos, lo haremos a través de un borrado lógico para no afectar a la integridad de datos en la base de datos. Para esto, modificaremos el valor de la propiedad `active` a `False`.
 
 ## Configuración del Proyecto
