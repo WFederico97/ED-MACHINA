@@ -137,9 +137,9 @@ PostgreSQL was used as the engine, and a script with the database creation runs 
 ### WALKTHROUGH
 
 1. Once the app is initialized, the `carreras` (degrees) and `materias` (subjects) tables are already populated with data and their respective referential integrity.
-2. To create a new person, you need to go to the 'PUT' method endpoint. This endpoint receives an `id` as a parameter and then a schema that includes the first name, last name, email, and a boolean field `active` which is set to `True` by default.
+2. To create a new person, you need to go to the 'POST' method endpoint. This endpoint receives an `id` as a parameter and then a schema that includes the first name, last name, email, and a boolean field `active` which is set to `True` by default.
 3. Once a person is created, they can be queried either through the general query like 'get all' or by `id`.
-4. If we want to add a degree or modify some data for an already created person, we must go back to step 2 and modify the necessary data in that endpoint.
+4. If we want to add a degree or modify some data for an already created person, we must go "PUT" endpoint and modify the necessary data in that endpoint.
 5. If we want to remove a person from the database, we will do so through a soft delete to avoid affecting data integrity in the database. For this, we will change the value of the `active` property to `False`.
 
 ## Project Setup
