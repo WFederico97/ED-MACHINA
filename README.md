@@ -81,33 +81,37 @@ Se utilizó el motor de PostgreSQL. A su vez, en el archivo `database.py` se eje
 La API estará disponible en [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ### Estructura del Proyecto
-
+```
 ED-MACHINA/
-        ├── .gitignore
-        ├── backend/
-        │   ├── config/
-        │   │   ├── env_prod.py
-        │   ├── crud.py
-        │   ├── db/
-        │   │   ├── database.py
-        │   ├── docker-compose.yml
-        │   ├── dockerfile
-        │   ├── main.py
-        │   ├── models/
-        │   │   ├── carreraModel.py
-        │   │   ├── carreraPersonaModel.py
-        │   │   ├── materiaModel.py
-        │   │   ├── personaModel.py
-        │   ├── requirements.txt
-        │   ├── routes/
-        │   │   ├── carrera.py
-        │   │   ├── materia.py
-        │   │   ├── persona.py
-        │   ├── schemas/
-        │   │   ├── carrera.py
-        │   │   ├── materia.py
-        │   │   ├── persona.py
-        ├── README.md
+├── .gitignore
+├── backend/
+│   ├── config/
+│   │   ├── env_prod.py
+│   ├── crud.py
+│   ├── db/
+│   │   ├── database.py
+│   ├── docker-compose.yml
+│   ├── dockerfile
+│   ├── main.py
+│   ├── models/
+│   │   ├── carreraModel.py
+│   │   ├── carreraPersonaModel.py
+│   │   ├── materiaModel.py
+│   │   ├── personaModel.py
+│   │   ├── __init__.py
+│   ├── requirements.txt
+│   ├── routes/
+│   │   ├── carrera.py
+│   │   ├── materia.py
+│   │   ├── persona.py
+│   ├── schemas/
+│   │   ├── carrera.py
+│   │   ├── materia.py
+│   │   ├── persona.py
+├── README.md
+
+```
+
 
 ---
 
@@ -192,29 +196,32 @@ PostgreSQL was used as the engine, and a script with the database creation runs 
     The API will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ### Project Structure
+```
 ED-MACHINA/
-        ├── .gitignore
-        ├── backend/
-        │   ├── config/
-        │   │   ├── env_prod.py
-        │   ├── crud.py
-        │   ├── db/
-        │   │   ├── database.py
-        │   ├── docker-compose.yml
-        │   ├── dockerfile
-        │   ├── main.py
-        │   ├── models/
-        │   │   ├── carreraModel.py
-        │   │   ├── carreraPersonaModel.py
-        │   │   ├── materiaModel.py
-        │   │   ├── personaModel.py
-        │   ├── requirements.txt
-        │   ├── routes/
-        │   │   ├── carrera.py
-        │   │   ├── materia.py
-        │   │   ├── persona.py
-        │   ├── schemas/
-        │   │   ├── carrera.py
-        │   │   ├── materia.py
-        │   │   ├── persona.py
-        ├── README.md
+├── .gitignore
+├── backend/
+│   ├── config/
+│   │   ├── env_prod.py
+│   ├── crud.py
+│   ├── db/
+│   │   ├── database.py
+│   ├── docker-compose.yml
+│   ├── dockerfile
+│   ├── main.py
+│   ├── models/
+│   │   ├── carreraModel.py
+│   │   ├── carreraPersonaModel.py
+│   │   ├── materiaModel.py
+│   │   ├── personaModel.py
+│   │   ├── __init__.py
+│   ├── requirements.txt
+│   ├── routes/
+│   │   ├── carrera.py
+│   │   ├── materia.py
+│   │   ├── persona.py
+│   ├── schemas/
+│   │   ├── carrera.py
+│   │   ├── materia.py
+│   │   ├── persona.py
+├── README.md
+```
