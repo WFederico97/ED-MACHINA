@@ -23,15 +23,6 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 session_local = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
-def initialize_database():
-    script_path = os.path.join('scripts', 'init.sql')
-    with open(script_path, 'r') as file:
-        sql_script = file.read()
-
-    with engine.connect() as connection:
-        connection.execute(text(sql_script))
-
-initialize_database()
 
 Base = declarative_base()
 

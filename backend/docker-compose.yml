@@ -11,8 +11,6 @@ services:
       - ./config/env_prod.py
     depends_on:
       - db
-    entrypoint: ["/bin/sh", "-c", "python /app/db/database.py && uvicorn main:app --host 0.0.0.0 --port 8000"]
-
   db:
     image: postgres:13
     environment:
@@ -21,6 +19,7 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:
