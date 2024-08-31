@@ -1,12 +1,12 @@
 import os
 from typing import Annotated
 from fastapi import Depends
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from dotenv import load_dotenv
 
-env_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env', '.env')
+env_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
 
 if os.path.exists(env_file_path):
     print("El archivo .env fue encontrado.")
@@ -29,6 +29,16 @@ SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_P
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 session_local = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+def initialize_database():
+    script_path = os.path.join('scripts', 'init.sql')
+    with open(script_path, 'r') as file:
+        sql_script = file.read()
+
+    with engine.connect() as connection:
+        connection.execute(text(sql_script))
+
+initialize_database()
 
 Base = declarative_base()
 
