@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from db.database import  create_tables;
 from fastapi_pagination import  add_pagination
 from routes.carrera import router_carreras
@@ -14,7 +15,6 @@ app.include_router(router_materias)
 
 @app.get("/")
 def read_root():
-    return {"hello" : "World"}
-
+    return RedirectResponse(url='/docs')
 
 add_pagination(app)
