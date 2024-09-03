@@ -1,6 +1,6 @@
-# ED-MACHINA Challenge
+# Desafío ED-MACHINA
 
-by Federico Wuthrich
+por Federico Wuthrich
 
 ## BACKEND
 
@@ -9,7 +9,10 @@ Se solicitó hacer una API CRUD basada en LEADS que registre y consulte personas
 - **Modelo**: Representado por los archivos `.py` en la carpeta `Models` y `Schemas`.
 - **Controlador**: Representado por aquellos archivos que se encuentran en la carpeta `Routes`.
 - **Vista**: Representada por los JSON que son devueltos en las respuestas del SWAGGER de FastAPI.
-- **Arquitectura Modular**: Todos los módulos fueron separados en capas, permitiendo una facilidad de aislación de responsabilidades y haciendo que el código sea escalable.
+- **Arquitectura Modular**: Todos los módulos fueron separados en capas, permitiendo una facilidad de aislamiento de responsabilidades y haciendo que el código sea escalable.
+- **Patrón Repository**: Se aplicó el patrón de desarrollo repository para abstraer la lógica de acceso a los datos del resto de la aplicación.
+- **POO**: Se aplicaron conceptos de POO como Encapsulamiento al separar cada lógica en su respectivo servicio y repositorio, Abstracciones donde a través de los controladores se interactúa con los servicios y los repositorios, Polimorfismo y Herencia donde a través de una clase base los diferentes servicios y repositorios comparten métodos y los heredan a través de esta.
+- **Principio de responsabilidad única**: Donde cada clase tiene su único propósito como Routes, Services y Repositories.
 
 ## CONTENEDORIZACIÓN
 
@@ -19,12 +22,12 @@ Realizada con Docker y compuesta con Docker-Compose.
 
 Se utilizó el motor de PostgreSQL. A su vez, en el archivo `database.py` se ejecuta un script con la creación de la base de datos para que se realice antes de inicializar la app. El script puede encontrarse en la carpeta `Scripts/init.sql`.
 
-### WALKTHROUGH
+### PASO A PASO
 
 1. Una vez inicializada la app, las tablas `carreras` y `materias` ya se encuentran con datos y su respectiva integridad referencial.
-2. Para crear una nueva persona, hay que dirigirse al endpoint de método 'POST'. Este mismo recibe un `id` como parámetro y luego un schema que contiene nombre, apellido, email y un campo booleano `active` que viene predeterminado como `True`.
+2. Para crear una nueva persona, hay que dirigirse al endpoint de método 'POST'. Este recibe un `id` como parámetro y luego un esquema que contiene nombre, apellido, email y un campo booleano `active` que viene predeterminado como `True`.
 3. Una vez creada la persona, puede ser consultada tanto por la consulta general como 'get all' y por `id`.
-4. Si queremos ELIMINAR una carrera o modificar algún dato a una persona ya creada, deberemos ir al endpoint PUT y modificar los datos que haga falta en ese endpoint.
+4. Si queremos ELIMINAR una carrera o modificar algún dato de una persona ya creada, deberemos ir al endpoint PUT y modificar los datos que haga falta en ese endpoint.
 5. En el caso de que queramos eliminar a una persona de la base de datos, lo haremos a través de un borrado lógico para no afectar a la integridad de datos en la base de datos. Para esto, modificaremos el valor de la propiedad `active` a `False`.
 
 ## Configuración del Proyecto
@@ -78,9 +81,10 @@ Se utilizó el motor de PostgreSQL. A su vez, en el archivo `database.py` se eje
     docker-compose up --build
     ```
 
-La API estará disponible en [http://127.0.0.1:8000](http://127.0.0.1:8000).
+    La API estará disponible en [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ### Estructura del Proyecto
+
 ```
 ED-MACHINA/
 ├── .gitignore
@@ -125,6 +129,9 @@ The task was to create a CRUD API based on LEADS that registers and queries peop
 - **Controller**: Represented by the files located in the `Routes` folder.
 - **View**: Represented by the JSONs returned in the responses from FastAPI's SWAGGER.
 - **Modular Architecture**: All modules were separated into layers to facilitate the isolation of responsibilities and make the code scalable.
+- **Repository Pattern**: The repository development pattern was applied to abstract data access logic from the rest of the app.
+- **OOP**: Concepts of OOP were applied, such as Encapsulation by separating each logic into its respective service and repository, Abstractions where controllers interact with services and repositories, Polymorphism and Inheritance where different services and repositories share methods and inherit them through a base class.
+- **Single Responsibility Principle**: Where each class has its single purpose such as Routes, Services, and Repositories.
 
 ### CONTAINERIZATION
 
@@ -139,7 +146,7 @@ PostgreSQL was used as the engine, and a script with the database creation runs 
 1. Once the app is initialized, the `carreras` (degrees) and `materias` (subjects) tables are already populated with data and their respective referential integrity.
 2. To create a new person, you need to go to the 'POST' method endpoint. This endpoint receives an `id` as a parameter and then a schema that includes the first name, last name, email, and a boolean field `active` which is set to `True` by default.
 3. Once a person is created, they can be queried either through the general query like 'get all' or by `id`.
-4. If we want to add a degree or modify some data for an already created person, we must go "PUT" endpoint and modify the necessary data in that endpoint.
+4. If we want to add a degree or modify some data for an already created person, we must go to the "PUT" endpoint and modify the necessary data in that endpoint.
 5. If we want to remove a person from the database, we will do so through a soft delete to avoid affecting data integrity in the database. For this, we will change the value of the `active` property to `False`.
 
 ## Project Setup
