@@ -9,6 +9,7 @@ class PersonaBase(BaseModel):
 
 class PersonaCreate(PersonaBase):
     carreras: Optional[List[int]] = []
+    active: Optional[bool] = True
 
 
 class Persona(PersonaBase):

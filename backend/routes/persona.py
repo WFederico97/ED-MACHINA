@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status,HTTPException
 from sqlalchemy.orm import Session
 from fastapi_pagination import Page, paginate
-from crud import alter_persona, create_persona, get_persona_by_id, get_personas
+from services.personaService import PersonaService
 from db.database import  get_db;
 from schemas.persona import Persona, PersonaCreate, PersonaUpdate
 
@@ -18,22 +18,30 @@ router_personas = APIRouter(
     summary="Take all personas of the DB",
 )
 def get_all_personas(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    personas = get_personas(db,skip=skip,limit=limit)
-    if not personas:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail='not found')
-    return paginate(personas)
-
+    persona_service = PersonaService(db)
+    try:
+        personas = persona_service.get_all_personas(skip, limit)
+        if not personas:
+            raise HTTPException(404, "No personas found.")
+        return paginate(personas)
+    except HTTPException as e:
+        raise e
+    
 @router_personas.get(
-    "/{id}", 
+    "/{persona_id}", 
     response_model=Persona, 
     status_code=status.HTTP_200_OK,
     summary="Get an specific Persona by persona_id",
     )
 def get_persona(persona_id:int , db: Session = Depends(get_db)):
-    persona = get_persona_by_id(persona_id,db)
-    if not persona:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Persona no encontrada')
-    return persona
+    persona_service = PersonaService(db)
+    try:
+        persona = persona_service.get_persona(persona_id)
+        if not persona:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Persona no encontrada')
+        return persona
+    except HTTPException as e:
+        raise e
 
 
 @router_personas.post(
@@ -41,8 +49,8 @@ def get_persona(persona_id:int , db: Session = Depends(get_db)):
     status_code=status.HTTP_201_CREATED,
     summary="Register a new persona",
     )
-def register_persona(user: PersonaCreate, db: Session = Depends(get_db)):
-    response =  create_persona(db, user)
+def register_persona(persona: PersonaCreate, db: Session = Depends(get_db)):
+    response =  PersonaService(db).create_persona(persona)
     return response
 
 
@@ -54,7 +62,7 @@ def register_persona(user: PersonaCreate, db: Session = Depends(get_db)):
     description="This endpoint was made for two purposes , you can edit a Persona by its id and you can delete it modifying the active field as False . This last feature were made for protecting the data integrity of the database",
     )
 def update_persona(id_persona: int, persona_update: PersonaUpdate, db: Session = Depends(get_db)):
-    response = alter_persona(db,id_persona,persona_update)
+    response = PersonaService(db).update_persona(id_persona,persona_update)
     if response :
         return response
     else:
